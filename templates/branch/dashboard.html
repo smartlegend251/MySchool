@@ -63,14 +63,18 @@
             <a href="#" class="nav-link">Staff</a>
         </div>
         <div class="content">
-            <h1>Welcome, Branch Admin!, {{ request.user}} 
+            <img style="width: 200px;" src="/{{ image}}" alt="">
+            <!-- <img src="{{ request.user.image.url }}" alt="Profile Image"> -->
+            <h1>Welcome, Branch Admin!, {{ request.user.first_name}}  {{ request.user.last_name}}   {{request.user.id}}
                 
             </h1>
-            
+             
             <p>Your dashboard content goes here.</p>
             <div class="button-container">
-                <button class="entry-button">Student Entry</button>
-                <button class="entry-button">Staff Entry</button>
+                <a href="/Accounts/signup_student/">
+                <button class="entry-button">Student Entry</button></a>
+                <a href="/Accounts/signup_staff/">
+                <button class="entry-button">Staff Entry</button></a>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ def student_login(request):
 
         
 
-        if Student.objects.filter(username = username).exists():
+        if MyUser.objects.filter(username = username).exists():
             user = authenticate(username = username, password = password)
             if user is not None:
                 login(request, user)
@@ -44,7 +44,7 @@ def branch_login(request):
 
         
 
-        if BranchAdmin.objects.filter(username = username).exists():
+        if MyUser.objects.filter(username = username).exists():
             user = authenticate(username = username, password = password)
             if user is not None:
                 login(request, user)

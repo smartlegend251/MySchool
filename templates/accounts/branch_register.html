@@ -17,13 +17,14 @@
     </style>
 </head>
 <body>
-    {% if error %}
-    <div style="background-color: red;">
-        {{error}}
-    </div>
-    {% endif %}
+
     <div class="container form-container">
         <h2 class="text-center mb-4">Create Branch Admin</h2>
+        {% if error %}
+        <div style="background-color: red; padding: 5px; font-weight: bold;">
+            {{error}}
+        </div>
+        {% endif %}
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
           

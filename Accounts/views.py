@@ -126,8 +126,8 @@ def signup_branch(request):
 
         # Check if passwords match
         if password1 != password2:
-            return redirect('/Authentication/branch_login/', {'error': "Passwords don't match, Please Retry"})
-    
+            return render(request ,'accounts/branch_register.html', {'error': "Passwords don't match, Please try again!"})
+
         # Create user
         user = MyUser.objects.create_user(username=username, email=email, password=password1)
         user.first_name = first_name

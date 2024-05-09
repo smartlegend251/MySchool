@@ -34,6 +34,7 @@ EXT = [
     'Student',
     'Staff',
     'Start',
+    
 ]
 INSTALLED_APPS += EXT
 
@@ -117,9 +118,10 @@ STATIC_URL = 'static/'
  
 STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 STATICFILES_DIRS=[ BASE_DIR/'static/']  
-    
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'Branch', 'images')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'Accounts.MyUser'
+AUTH_USER_MODEL = 'Accounts.MyUser' 
