@@ -125,3 +125,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'Branch', 'images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'Accounts.MyUser' 
+LOGIN_URL_STUDENT = '/Authentication/student_login/'
+LOGIN_URL_STAFF = '/Authentication/staff_login/'
+LOGIN_URL_BRANCH = '/Authentication/branch_login/'
+

@@ -57,13 +57,12 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <img src="profile-photo.jpg" alt="Profile Photo" class="profile-photo">
-            <a href="#" class="nav-link">Dashboard</a>
-            <a href="#" class="nav-link">Students</a>
-            <a href="#" class="nav-link">Staff</a>
+            <img src="/{{ image}}" alt="Profile Photo" class="profile-photo">
+            <a href="/Branch/dashboard" class="nav-link">Dashboard</a>
+            <a href="/Accounts/signup_student/" class="nav-link">Students</a>
+            <a href="/Accounts/signup_staff/" class="nav-link">Staff</a>
         </div>
         <div class="content">
-            <img style="width: 200px;" src="/{{ image}}" alt="">
             <!-- <img src="{{ request.user.image.url }}" alt="Profile Image"> -->
             <h1>Welcome, Branch Admin!, {{ request.user.first_name}}  {{ request.user.last_name}}   {{request.user.id}}
                 

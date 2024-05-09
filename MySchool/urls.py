@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-
+# from Authentication.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('Staff/', include ('Staff.urls') ),
     path('Student/', include ('Student.urls') ),
     path('Accounts/', include ('Accounts.urls') ),
+    # 
 ]
  
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
