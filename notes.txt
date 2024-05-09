@@ -1,0 +1,130 @@
+# from django import forms
+# from django.contrib.auth.forms import UserCreationForm
+# from django.db import transaction
+# from .models import *
+
+# class Studentregister(UserCreationForm):
+#     first_name = forms.CharField(required = True)
+#     last_name = forms.CharField(required = True)
+    
+#     class Meta(UserCreationForm.Meta):
+#         model = MyUser
+    
+#     @transaction.atomic
+#     def dat_save(self):
+#         user = super().save(commit=False)
+#         user.first_name = self.cleaned_data.get('first_name')
+#         user.last_name = self.cleaned_data.get('last_name')
+#         user.save()
+#         student = Student.object.create(user= user)
+        
+
+        
+
+
+
+class MyUser(AbstractUser):
+    is_Student = models.BooleanField(default=False)
+    is_StaffAdmin = models.BooleanField(default=False)
+    is_BranchAdmin = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+class Student(models.Model):
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    )
+    SOCIAL_CATEGORY_CHOICES = [
+        ('General', 'General'),
+        ('OBC', 'Other Backward Class'),
+        ('SC', 'Scheduled Caste'),
+        ('ST', 'Scheduled Tribe'),
+        ('EWS', 'Economically Weaker Section'),
+        # Add more options as needed
+    ]
+    DISABILITY_CHOICES = [
+        ('None', 'None'),
+        ('Visual', 'Visual Impairment'),
+        ('Hearing', 'Hearing Impairment'),
+        ('Mobility', 'Mobility Impairment'),
+        ('Cognitive', 'Cognitive Impairment'),
+        ('Other', 'Other'),
+        # Add more options as needed
+    ]
+    BLOOD_GROUP_CHOICES = [
+        ('A+', 'A+'),
+        ('A-', 'A-'),
+        ('B+', 'B+'),
+        ('B-', 'B-'),
+        ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
+        ('O+', 'O+'),
+        ('O-', 'O-'),
+        # Add more options as needed
+    ]
+    GRADE_CHOICES = [
+        ('lkg', 'LKG'),
+        ('ukg', 'UKG'),
+        ('1', 'Grade 1'),
+        ('2', 'Grade 2'),
+        ('3', 'Grade 3'),
+        ('4', 'Grade 4'),
+        ('5', 'Grade 5'),
+        ('6', 'Grade 6'),
+        ('7', 'Grade 7'),
+        ('8', 'Grade 8'),
+        ('9', 'Grade 9'),
+        ('10', 'Grade 10'),
+    ]
+    
+    # Add additional fields specific to students
+    image = models.ImageField(upload_to='static/Student/images/', blank=True, null=True)
+    roll_number = models.CharField(max_length=10)
+    sats_number = models.CharField(max_length=10)
+    grade = models.CharField(max_length=100 ,choices=GRADE_CHOICES)
+    
+    phone_number = models.CharField(max_length=15)  # You might want to use PhoneNumberField if you're using a library like Django Phonenumber Field
+    middle_name = models.CharField(max_length=50, blank=True, null=True)
+    fatherName = models.CharField(max_length=100)
+    motherName = models.CharField(max_length=100)
+    
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    dob = models.DateField(blank=True, null=True)
+    aadharNumber =  models.CharField(max_length=12, unique=True, null=True,blank=True)
+    religion = models.CharField(max_length=15, null=True,blank=True)
+    Social_catagory = models.CharField(max_length=50, choices=SOCIAL_CATEGORY_CHOICES)
+    medium = models.CharField(max_length=10)
+    disablity = models.CharField(max_length=20, choices=DISABILITY_CHOICES, default='None')
+    blood_group =  models.CharField(max_length=3, choices=BLOOD_GROUP_CHOICES,null=True, blank=True) 
+
+
+      
+
+class Staff(models.Model):
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
+    # Add additional fields specific to staff
+    aadharNumber =  models.CharField(max_length=12, unique=True)
+    branch_code = models.IntegerField()
+    roll_for = models.CharField(max_length=100)
+    assigned_class = models.CharField(max_length=100)
+   
+
+class BranchAdmin(models.Model):
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
+
+    # Add additional fields specific to branch admin
+    branch_code = models.IntegerField()
+    branch_name = models.CharField(max_length=100)
+    gender = models.CharField(max_length=10, choices=(('male', 'Male'), ('female', 'Female'), ('other', 'Other')))
+    date_of_birth = models.DateField()
+    languages_known = models.CharField(max_length=255)
+    phone_number =models.CharField(max_length=15,null=True,blank=True)
+    image = models.ImageField(upload_to='static/Branch/images/', blank=True, null=True)
+  
+
+
+
+

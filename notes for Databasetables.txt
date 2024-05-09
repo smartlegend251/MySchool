@@ -1,0 +1,70 @@
+from django.shortcuts import render
+from Accounts.models import *
+
+user = 1
+def Staff(request):
+    
+    staff = Staff.objects.create(
+
+            user=user,
+            # Add other student-related data here
+            aadharNumber=request.POST.get('aadharNumber'),
+            branch_code=request.POST.get('branch_code'),
+            roll_for=request.POST.get('roll_for'),
+            assigned_class=request.POST.get('assigned_class'),
+            branch_name=request.POST.get('branch_name'),
+            position=request.POST.get('position'),
+            joining_date=request.POST.get('joining_date'),
+            phone_number=request.POST.get('phone_number'),
+            address=request.POST.get('address'),
+            date_of_birth=request.POST.get('date_of_birth'),
+            gender=request.POST.get('gender'),
+            marital_status=request.POST.get('marital_status'),
+            qualification=request.POST.get('qualification'),
+            experience_years=request.POST.get('experience_years'),
+            emergency_contact_name=request.POST.get('emergency_contact_name'),
+            emergency_contact_number=request.POST.get('emergency_contact_number'),
+            emergency_contact_relationship=request.POST.get('emergency_contact_relationship'),
+            image=request.FILES.get('image'),
+            salary=request.POST.get('salary'),
+            qualification_certificate=request.FILES.get('qualification_certificate'),
+            languages_known=request.POST.get('languages_known'),
+                    
+        )
+    staff.save()
+
+def student(request):
+     student = Student.objects.create(
+            user=user,
+            # Add other student-related data here
+            image=request.FILES.get('image'),
+            roll_number=request.POST.get('roll_number'),
+            sats_number=request.POST.get('sats_number'),
+            grade=request.POST.get('grade'),
+            phone_number=request.POST.get('phone_number'),
+            middle_name=request.POST.get('middle_name'),
+            fatherName=request.POST.get('fatherName'),
+            motherName=request.POST.get('motherName'),
+            gender=request.POST.get('gender'),
+            dob=request.POST.get('dob'),
+            aadharNumber=request.POST.get('aadharNumber'),
+            religion=request.POST.get('religion'),
+            Social_catagory=request.POST.get('Social_catagory'),
+            medium=request.POST.get('medium'),
+            disablity=request.POST.get('disablity'),
+            blood_group=request.POST.get('blood_group'),
+            address=request.POST.get('address'),
+            city=request.POST.get('city'),
+            state=request.POST.get('state'),
+            pincode=request.POST.get('pincode'),
+            parent_contact=request.POST.get('parent_contact'),
+            student_contact=request.POST.get('student_contact'),
+            parent_email=request.POST.get('parent_email'),
+            student_email=request.POST.get('student_email'),
+            branch_code=request.POST.get('branch_code'),
+            branch_name=request.POST.get('branch_name'),
+            tc_issued=request.POST.get('tc_issued') == 'on',  # Checkbox handling
+            tc=request.POST.get('tc'),
+
+        )
+     student.save()

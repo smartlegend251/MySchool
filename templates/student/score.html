@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Marks - {{ class_name }}</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>FA1</th>
+                    <th>FA2</th>
+                    <th>SA1</th>
+                    <th>FA3</th>
+                    <th>FA4</th>
+                    <th>SA2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject, marks in marks_data.items %}
+                <tr>
+                    <td>{{ subject }}</td>
+                    <td>{{ marks.FA1 }}</td>
+                    <td>{{ marks.FA2 }}</td>
+                    <td>{{ marks.SA1 }}</td>
+                    <td>{{ marks.FA3 }}</td>
+                    <td>{{ marks.FA4 }}</td>
+                    <td>{{ marks.SA2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
