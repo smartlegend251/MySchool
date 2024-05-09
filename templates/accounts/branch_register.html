@@ -17,6 +17,11 @@
     </style>
 </head>
 <body>
+    {% if error %}
+    <div style="background-color: red;">
+        {{error}}
+    </div>
+    {% endif %}
     <div class="container form-container">
         <h2 class="text-center mb-4">Create Branch Admin</h2>
         <form method="post" action="" enctype="multipart/form-data">
@@ -30,7 +35,7 @@
             </div>
             
             <div class="form-group">
-                <label for="last_name">Last Name:</label>
+                <label for="last_name">Last Name:</label> 
                 <input type="text" class="form-control" id="last_name" name="last_name">
             </div>
             <div class="form-group">
@@ -39,8 +44,12 @@
             </div>
             
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <label for="password1">Password:</label>
+                <input type="password" class="form-control" id="password1" name="password1">
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" class="form-control" id="password2" name="password2">
             </div>
 
             <div class="form-group">

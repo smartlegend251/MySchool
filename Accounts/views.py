@@ -33,7 +33,7 @@ def signup_student(request):
             phone_number=request.POST.get('phone_number'),
             middle_name=request.POST.get('middle_name'),
             fatherName=request.POST.get('fatherName'),
-            motherName=request.POST.get('motherName'),
+            motherName=request.POST.get('motherName'), 
             gender=request.POST.get('gender'),
             dob=request.POST.get('dob'),
             # aadharNumber=request.POST.get('aadharNumber'),
@@ -126,8 +126,8 @@ def signup_branch(request):
 
         # Check if passwords match
         if password1 != password2:
-            return render(request, 'signup_student.html', {'error': "Passwords don't match"})
-
+            return redirect('/Authentication/branch_login/', {'error': "Passwords don't match, Please Retry"})
+    
         # Create user
         user = MyUser.objects.create_user(username=username, email=email, password=password1)
         user.first_name = first_name
