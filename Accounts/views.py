@@ -1,5 +1,35 @@
 from django.shortcuts import render,redirect
 from .models import *
+import random,string
+from datetime import datetime
+
+
+def generate_roll_number(grade, sats_number, first_name  ):
+ 
+
+    # Get the last 3 digits of sats_number
+    sats_last_three = str(sats_number)[-4:]
+
+    # Get the first letter of the first name and convert it to uppercase
+    first_letter = first_name[0].upper()
+
+    # Get the last two digits of the current year
+    join_year = datetime.now().year % 100
+
+    # Define the class/standard
+    class_std = grade
+
+    # Generate a random alphanumeric string of length 3
+    random_chars = ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
+
+    # Format the roll number based on the specified sequence
+    # roll_number = "{}-{}{}{}".format( first_letter,join_year, sats_last_three, class_std)
+    roll_number = "{}-{} {}{} {}".format( first_letter, class_std, random_chars,join_year, sats_last_three)
+
+    return roll_number
+
+
+    
 # Create your views here.
 def signup_student(request):
     if request.method == 'POST':
@@ -10,16 +40,19 @@ def signup_student(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-
+        grade= request.POST.get('grade'),
+        sats_number = request.POST.get('sats_number')
+        roll_number= generate_roll_number(grade, sats_number, first_name  )
         # Check if passwords match
         if password1 != password2:
-            return render(request, 'signup_student.html', {'error': "Passwords don't match"})
+            return render(request, 'accounts/student_register.html', {'error': "Passwords don't match, Please Try Again!"})
 
         # Create user
         user = MyUser.objects.create_user(username=username, email=email, password=password1)
         user.first_name = first_name
         user.last_name = last_name
         user.is_Student = True
+       
         user.save()
 
         # Create student
@@ -27,9 +60,11 @@ def signup_student(request):
             user=user,
             # Add other student-related data here
             image=request.FILES.get('image'),
-            roll_number=request.POST.get('roll_number'),
-            sats_number=request.POST.get('sats_number'),
-            grade=request.POST.get('grade'),
+            
+
+            sats_number=sats_number,
+            grade=grade,
+            roll_number = roll_number,
             phone_number=request.POST.get('phone_number'),
             middle_name=request.POST.get('middle_name'),
             fatherName=request.POST.get('fatherName'),
@@ -54,9 +89,12 @@ def signup_student(request):
             branch_name=request.POST.get('branch_name'),
             # tc_issued=False,
             # tc=request.POST.get('tc'),
-
+            
         )
+        
         student.save()
+        
+        
         return redirect('/Authentication/student_login/') 
     return render(request, 'accounts/student_register.html')
 
@@ -126,7 +164,7 @@ def signup_branch(request):
 
         # Check if passwords match
         if password1 != password2:
-            return render(request ,'accounts/branch_register.html', {'error': "Passwords don't match, Please try again!"})
+            return render(request ,'accounts/branch_register.html', {'error': "Passwords don't match, Please try again! "})
 
         # Create user
         user = MyUser.objects.create_user(username=username, email=email, password=password1)

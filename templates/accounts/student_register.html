@@ -1,51 +1,259 @@
-{% extends 'base.html' %}
+<!-- student_registration.html -->
 
-{% block title %}Apply for New Admission{% endblock %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+      {%if error%}
+      <div style="padding: 5px ; background-color: red;">
+      <span>{{error}}</span>
+      </div>
+      {%endif%}
+        <h2 class="text-center">Student Registration</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+          
+            <div class="form-group">
+             <div class="form-group">
+    <label for="image">Image:</label>
+    <input type="file" id="image" name="image" class="form-control-file">
+    <div id="imagePreview" class="mt-2"></div>
+</div>
+<script>
+  // Function to preview selected image
+  function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+          var output = document.getElementById('imagePreview');
+          output.innerHTML = '<img src="' + reader.result + '" class="img-fluid" style="max-width: 200px; max-height: 200px;" />';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+  }
+  
+  // Attach the preview function to the file input's change event
+  document.getElementById('image').addEventListener('change', previewImage);
+</script>
+
+<br>
 
 
-{% block content %}
-<div class="container mt-5">
-    <h2>Welcome to MotherLand</h2>
-    <fieldset>
-       <legend>Register Page</legend>
-    
-  <form action="" method="post" >
-    {% csrf_token %}
-        <div class="mb-3">
-          <label for="firstName" class="form-label">FirstName</label>
-          <input type="text" class="form-control" id="firstName" name="firstName" >
-          <!-- <div id="user" class="form-text"> </div> -->
-        </div>
-       
-        <div class="mb-3">
-          <label for="lastName" class="form-label">LastName</label>
-          <input type="text" class="form-control" id="lastName" name="lastName">
-          <!-- <div id="user" class="form-text"> </div> -->
-        </div>
+                <div class="form-group">
+                  <label class="col-form-label ">Student Entry</label>
+                  <!--  -->
+                    <div class="row">
+                      <div class="col-4">
+                        <label class="col-form-label ">First Name:</label> <span style="color: red;">*</span>
+                        <input type="text" id="first_name" name="first_name" class="form-control" required>
+                      </div>
+                      <div class="col-4">
+                        <label class="col-form-label ">Middle Name:</label>
+                        <input type="text" id="middle_name" name="middle_name" class="form-control">
+                      </div>
+                      <div class="col-4">
+                        <label class="col-form-label ">Last Name:</label> <span style="color: red;">*</span>
+                        <input type="text" id="last_name" name="last_name" class="form-control" required>
+                      </div>
+                    </div>
+                  <!-- </div> -->
+                </div>
 
-        <div class="mb-3">
-          <label for="userName" class="form-label">UserName</label>
-          <input type="text" class="form-control" id="userName" name="userName">
-          <!-- <div id="user" class="form-text"> </div> -->
+            
+            <div class="form-group">
+              <label for="username">Username:</label> <span style="color: red;">*</span>
+              <input type="text" id="username" name="username" class="form-control" required>
+          </div>
+            <div class="form-group">
+                <label for="password1">Password:</label> <span style="color: red;">*</span>
+                <input type="password" id="password1" name="password1" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password:</label> <span style="color: red;">*</span>
+                <input type="password" id="password2" name="password2" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="sats_number">Enrollment Number::</label> <span style="color: red;">*</span>
+              <input type="text" id="sats_number" name="sats_number" class="form-control" required>
+          </div>
+
+            <!-- Additional student-related fields -->
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">Grade:</label>
+            <!--  -->
+              <select id="grade" name="grade" class="form-control" required>
+                
+                <option selected value="">--select--</option> 
+                <option value="LKG">LKG</option>
+                <option value="UKG">UKG</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+              </select>
+            <!-- </div> -->
+          </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number:</label> <span style="color: red;">*</span>
+                <input type="text" id="phone_number" name="phone_number" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="fatherName">Father's Name:</label> <span style="color: red;">*</span>
+                <input type="text" id="fatherName" name="fatherName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="motherName">Mother's Name:</label> <span style="color: red;">*</span>
+                <input type="text" id="motherName" name="motherName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label> <span style="color: red;">*</span>
+                <select id="gender" name="gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label> <span style="color: red;">*</span>
+                <input type="date" id="dob" name="dob" class="form-control">
+            </div>
+
+          <div class="form-group">
+            <label class="col-form-label">Medium:</label>
+            <select class="form-control" name="medium" required>
+                <option value="">Select Medium</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Kannada">Kannada</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Bengali">Bengali</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Gujarati">Gujarati</option>
+                <option value="Urdu">Urdu</option>
+                <option value="Punjabi">Punjabi</option>
+                <option value="Odia">Odia</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Sanskrit">Sanskrit</option>
+                <option value="Assamese">Assamese</option>
+                <option value="Maithili">Maithili</option>
+                <option value="Sindhi">Sindhi</option>
+                <option value="Nepali">Nepali</option>
+                <option value="Konkani">Konkani</option>
+                <option value="Dogri">Dogri</option>
+                <option value="Manipuri">Manipuri</option>
+                <option value="Kashmiri">Kashmiri</option>
+                <option value="Santali">Santali</option>
+                <option value="Sindhi">Sindhi</option>
+                <option value="Khasi">Khasi</option>
+                <option value="Mizo">Mizo</option>
+                <option value="Bodo">Bodo</option>
+                <option value="Garo">Garo</option>
+                <option value="Tulu">Tulu</option>
+                <option value="Angika">Angika</option>
+            </select>
         </div>
         
+        <div class="form-group">
+          <label class="col-form-label">Disability:</label>
+          <select class="form-control" name="disability" required>
+              <option value="">Select Disability</option>
+              <option value="None">None</option>
+              <option value="Visual Impairment">Visual Impairment</option>
+              <option value="Hearing Impairment">Hearing Impairment</option>
+              <option value="Mobility Impairment">Mobility Impairment</option>
+              <option value="Intellectual Disability">Intellectual Disability</option>
+              <option value="Learning Disability">Learning Disability</option>
+              <option value="Psychosocial Disability">Psychosocial Disability</option>
+              <option value="Speech and Language Impairment">Speech and Language Impairment</option>
+              <option value="Autism Spectrum Disorder">Autism Spectrum Disorder</option>
+              <option value="Cerebral Palsy">Cerebral Palsy</option>
+              <option value="Down Syndrome">Down Syndrome</option>
+              <option value="Muscular Dystrophy">Muscular Dystrophy</option>
+              <option value="Multiple Sclerosis">Multiple Sclerosis</option>
+              <option value="Parkinson's Disease">Parkinson's Disease</option>
+              <option value="Spinal Cord Injury">Spinal Cord Injury</option>
+              <option value="Dwarfism">Dwarfism</option>
+              <option value="Amputation">Amputation</option>
+              <option value="Deafblindness">Deafblindness</option>
+              <option value="Epilepsy">Epilepsy</option>
+              <option value="Hemophilia">Hemophilia</option>
+              <option value="Thalassemia">Thalassemia</option>
+              <option value="Tourette Syndrome">Tourette Syndrome</option>
+              <option value="Other">Other</option>
+          </select>
+      </div>
+      
+          <div class="form-group">
+            <label class="col-form-label ">Address:</label>
+            
+              <input type="text" class="form-control" name="address" required>
+            
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">City:</label>
+            
+              <input type="text" class="form-control" name="city" required>
+           
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">State:</label>
+            
+              <input type="text" class="form-control" name="state" required>
+            
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">Pincode:</label>
+            
+              <input type="text" class="form-control" name="pincode" required>
+            
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">Parent Contact:</label>
+            
+              <input type="text" class="form-control" name="parent_contact" required>
+            
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">Branch Code:</label>
+            
+              <input type="text" class="form-control" name="branch_code" required>
+            
+          </div>
+          <div class="form-group">
+            <label class="col-form-label ">Branch Name:</label>
+            
+              <input type="text" class="form-control" name="branch_name" required>
+            
+          </div>
+            <!-- End of additional fields -->
 
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Terms & Condition</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Apply</button>
-
-        <p><a href="/student/login">Have Account?</a></p>
-      </form>
-    </fieldset>
+            <input type="submit" value="Register" class="btn btn-primary">
+        </form>
     </div>
 
+</body>
 
-
-      {% endblock %}
- 
+</html>

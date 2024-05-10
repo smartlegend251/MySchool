@@ -62,8 +62,8 @@ class Student(models.Model):
     
     # Add additional fields specific to students
     image = models.ImageField(upload_to='static/Student/images/', blank=True, null=True)
-    roll_number = models.CharField(max_length=10)
-    sats_number = models.CharField(max_length=10)
+    roll_number = models.CharField(max_length=15)
+    sats_number = models.CharField(max_length=10,unique=True)
     grade = models.CharField(max_length=100 ,choices=GRADE_CHOICES)
     
     phone_number = models.CharField(max_length=15)  # You might want to use PhoneNumberField if you're using a library like Django Phonenumber Field
