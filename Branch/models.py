@@ -1,9 +1,11 @@
 from django.db import models
+from Accounts.models import *
 
 # Create your models here.
 
 
 class Branch(models.Model):
+    user = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING,null=True)
     branch_name = models.CharField(max_length=100)
     branch_code = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
