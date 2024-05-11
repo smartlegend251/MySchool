@@ -11,7 +11,7 @@ class Grade(admin.ModelAdmin):
 
     
     def branch_info(self, obj):
-        return f"{obj.branch.branch_name} ({obj.branch.branch_code}) "
+        return f"{obj.branch.branch_name} ({obj.branch.branch_code})  "
 
     
 
