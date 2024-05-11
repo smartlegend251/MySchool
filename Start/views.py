@@ -1,8 +1,12 @@
 from django.shortcuts import *
 from django.contrib.auth import *
+from Branch.models import *
 
 # Create your views here.
 def index(request):
+  
+
+
     return render(request,"index.html")
 
 def student_logout(requst):
