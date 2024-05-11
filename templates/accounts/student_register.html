@@ -84,8 +84,18 @@
             </div>
             
             <div class="form-group">
-              <label for="sats_number">Enrollment Number::</label> <span style="color: red;">*</span>
+              <label for="sats_number">Enrollment Number:</label> <span style="color: red;">*</span>
               <input type="text" id="sats_number" name="sats_number" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="yoj">Year of Joined:</label> <span style="color: red;">*</span>
+            <select name="yoj" id="yoj" class="form-control" required>
+              
+              <option value="">--select--</option>
+              {% for year in years %}
+                <option value="{{ year }}">{{ year }}</option>
+              {% endfor %}
+            </select>
           </div>
 
             <!-- Additional student-related fields -->
@@ -130,9 +140,9 @@
             <div class="form-group">
                 <label for="gender">Gender:</label> <span style="color: red;">*</span>
                 <select id="gender" name="gender" class="form-control">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
                 </select>
             </div>
             <div class="form-group">
@@ -178,14 +188,13 @@
         
         <div class="form-group">
           <label class="col-form-label">Disability:</label>
-          <select class="form-control" name="disability" required>
-              <option value="">Select Disability</option>
+          <select class="form-control" name="disablity" required>
               <option value="None">None</option>
-              <option value="Visual Impairment">Visual Impairment</option>
-              <option value="Hearing Impairment">Hearing Impairment</option>
-              <option value="Mobility Impairment">Mobility Impairment</option>
-              <option value="Intellectual Disability">Intellectual Disability</option>
-              <option value="Learning Disability">Learning Disability</option>
+              <option value="Visual">Visual Impairment</option>
+              <option value="Hearing">Hearing Impairment</option>
+              <option value="Mobility">Mobility Impairment</option>
+              <option value="Cognitive">Cognitive Impairment</option>
+              <!-- <option value="Learning Disability">Learning Disability</option>
               <option value="Psychosocial Disability">Psychosocial Disability</option>
               <option value="Speech and Language Impairment">Speech and Language Impairment</option>
               <option value="Autism Spectrum Disorder">Autism Spectrum Disorder</option>
@@ -201,7 +210,7 @@
               <option value="Epilepsy">Epilepsy</option>
               <option value="Hemophilia">Hemophilia</option>
               <option value="Thalassemia">Thalassemia</option>
-              <option value="Tourette Syndrome">Tourette Syndrome</option>
+              <option value="Tourette Syndrome">Tourette Syndrome</option> -->
               <option value="Other">Other</option>
           </select>
       </div>

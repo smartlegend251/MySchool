@@ -46,8 +46,8 @@ class Student(models.Model):
         # Add more options as needed
     ]
     GRADE_CHOICES = [
-        ('lkg', 'LKG'),
-        ('ukg', 'UKG'),
+        ('LKG', 'LKG'),
+        ('UKG', 'UKG'),
         ('1', 'Grade 1'),
         ('2', 'Grade 2'),
         ('3', 'Grade 3'),
@@ -61,8 +61,8 @@ class Student(models.Model):
     ]
     
     # Add additional fields specific to students
-    image = models.ImageField(upload_to='static/Student/images/', blank=True, null=True)
-    roll_number = models.CharField(max_length=15)
+    image = models.ImageField(upload_to='static/images/student', blank=True, null=True)
+    roll_number = models.CharField(max_length=20)
     sats_number = models.CharField(max_length=10,unique=True)
     grade = models.CharField(max_length=100 ,choices=GRADE_CHOICES)
     
@@ -123,7 +123,7 @@ class Staff(models.Model):
     emergency_contact_name = models.CharField(max_length=100)
     emergency_contact_number = models.CharField(max_length=15)
     emergency_contact_relationship = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='static/Staff/images/', blank=True, null=True)
+    # image = models.ImageField(upload_to='static/images/staff', blank=True, null=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     qualification_certificate = models.FileField(upload_to='Staff/qualification_certificates/', blank=True, null=True)
     languages_known = models.CharField(max_length=255)
@@ -140,5 +140,5 @@ class BranchAdmin(models.Model):
     date_of_birth = models.DateField()
     languages_known = models.CharField(max_length=255)
     phone_number =models.CharField(max_length=15,null=True,blank=True)
-    image = models.ImageField(upload_to='static/Branch/images/', blank=True, null=True)
+    image = models.ImageField(upload_to='static/images/branch', blank=True, null=True)
   

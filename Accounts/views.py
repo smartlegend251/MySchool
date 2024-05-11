@@ -4,7 +4,7 @@ import random,string
 from datetime import datetime
 
 
-def generate_roll_number(grade, sats_number, first_name  ):
+def generate_roll_number(grade, sats_number, first_name,yoj  ):
  
 
     # Get the last 3 digits of sats_number
@@ -14,24 +14,31 @@ def generate_roll_number(grade, sats_number, first_name  ):
     first_letter = first_name[0].upper()
 
     # Get the last two digits of the current year
-    join_year = datetime.now().year % 100
+    yoj = str(yoj)[-2:]
 
-    # Define the class/standard
-    class_std = grade
+    # Define the class/standard``
+    class_std = str(grade)
 
-    # Generate a random alphanumeric string of length 3
-    random_chars = ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
+    # # Generate a random alphanumeric string of length 3
+    # random_chars = ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
+    random_chars = ''.join(random.choices(string.ascii_uppercase , k=2))
 
     # Format the roll number based on the specified sequence
     # roll_number = "{}-{}{}{}".format( first_letter,join_year, sats_last_three, class_std)
-    roll_number = "{}-{} {}{} {}".format( first_letter, class_std, random_chars,join_year, sats_last_three)
+    roll_number = "{}-{} {}{} {}".format( first_letter, class_std, random_chars,yoj, sats_last_three)
 
     return roll_number
 
-
+    
     
 # Create your views here.
 def signup_student(request):
+    previous_year = datetime.now().year - 10
+    year_today = datetime.now().year  +1
+    years = list(range(previous_year, year_today))  # Generate list of years
+    
+# Pass years to the template context
+    context = {'years': years}
     if request.method == 'POST':
         # Extract data from the request
         username = request.POST.get('username')
@@ -40,20 +47,22 @@ def signup_student(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-        grade= request.POST.get('grade'),
+        grade= request.POST['grade']
         sats_number = request.POST.get('sats_number')
-        roll_number= generate_roll_number(grade, sats_number, first_name  )
+        yoj = request.POST['yoj']
+        roll_number= generate_roll_number(grade, sats_number, first_name,yoj  )
+        
         # Check if passwords match
         if password1 != password2:
-            return render(request, 'accounts/student_register.html', {'error': "Passwords don't match, Please Try Again!"})
+            return render(request, 'accounts/student_register.html',context, {'error': "Passwords don't match, Please Try Again!"})
 
         # Create user
         user = MyUser.objects.create_user(username=username, email=email, password=password1)
         user.first_name = first_name
         user.last_name = last_name
         user.is_Student = True
-       
         user.save()
+        
 
         # Create student
         student = Student.objects.create(
@@ -93,10 +102,11 @@ def signup_student(request):
         )
         
         student.save()
-        
+        print(roll_number)
+
         
         return redirect('/Authentication/student_login/') 
-    return render(request, 'accounts/student_register.html')
+    return render(request, 'accounts/student_register.html',context)
 
 
 def signup_staff(request):
@@ -126,7 +136,7 @@ def signup_staff(request):
             # Add other student-related data here
             # aadharNumber=request.POST.get('aadharNumber'),
             branch_code=request.POST.get('branch_code'),
-            roll_for=request.POST.get('roll_for'),
+            roll_for=str(request.POST.get('roll_for')),
             assigned_class=request.POST.get('assigned_class'),
             branch_name=request.POST.get('branch_name'),
             position=request.POST.get('position'),

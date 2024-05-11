@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import JsonResponse
-from .models import *
+from Accounts.models import *
 
 # Create your views here.
 
@@ -11,10 +11,23 @@ from .models import *
 # @login_required(login_url=settings.STUDENT_LOGIN_URL)
 
 def student_dashboard(request):
-    return render(request, 'student/dashboard.html')
+    user = request.user
+    print('the output is : ', user)
+
+    try:
+        student = Student.objects.get(user=user)
+        # print('the output is : ', branch)
+        image = student.image
+        print('the output is : ', image)
+    except Student.DoesNotExist:
+        # Handle the case where the BranchAdmin instance doesn't exist for the user
+        image = None
+    return render(request, 'student/dashboard.html',{'image':image})
 
 
 def student_attendance(request):
+   
+
     # Retrieve attendance data from the database
     # Assuming Attendance model has 'student' (ForeignKey to User model), 'date' (DateField), and 'present' (BooleanField)
     # attendance_data = Attendance.objects.all()
@@ -26,11 +39,8 @@ def student_attendance(request):
     # Calculate attendance percentage
     # attendance_percentage = (present_days / total_days) * 100 if total_days > 0 else 0
     
-    context = {
-        # 'attendance_percentage': attendance_percentage
-    }
     
-    return render(request, 'student/attendance.html', context)
+    return render(request, 'student/attendance.html')
 
 
 
